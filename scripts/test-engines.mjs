@@ -75,7 +75,6 @@ try {
   tinyfix = await loadTinyfix({
     baseUrl: new URL("models/tinyfix/", origin).href,
     mode: "careful",
-    wasmPaths: new URL("wasm/", origin).href,
   });
 
   const sample = "I got a letter form the bank.";
