@@ -35,9 +35,10 @@ const commonWord = vocabularyRows
   .filter(([word]) => /[\u0600-\u06ff]/.test(word) && word.length > 3)
   .sort((a, b) => b[1] - a[1])[0]?.[0];
 assert.ok(commonWord, "Persian vocabulary must contain words");
-let typo = commonWord.slice(0, -1);
-if (vocabulary.has(typo)) typo = commonWord.slice(1);
-assert.ok(!vocabulary.has(typo), "generated Persian typo must not already be in vocabulary");
+const typo = ["ژ", "ظ", "ث", "ض", "غ", "ق", "پ", "چ"]
+  .map((prefix) => prefix + commonWord)
+  .find((candidate) => !vocabulary.has(candidate));
+assert.ok(typo, "could not generate an unknown Persian typo");
 const persianFix = suggestPersian(typo, vocabulary);
 assert.ok(persianFix, "Persian correction engine should suggest a vocabulary candidate");
 assert.ok(vocabulary.has(persianFix.replacement), "Persian suggestion must be in the bundled vocabulary");
