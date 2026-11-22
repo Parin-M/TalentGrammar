@@ -1,18 +1,15 @@
 {
   "manifest_version": 3,
   "name": "TalentGrammar",
-  "version": "0.1.0",
-  "description": "A privacy-first Persian and English writing assistant.",
+  "version": "0.2.0",
+  "description": "Offline Persian and English proofreading.",
   "permissions": [
     "storage",
-    "contextMenus",
-    "activeTab"
-  ],
-  "host_permissions": [
-    "<all_urls>"
+    "contextMenus"
   ],
   "background": {
-    "service_worker": "src/background.js"
+    "service_worker": "src/background.js",
+    "type": "module"
   },
   "action": {
     "default_popup": "popup/popup.html",
