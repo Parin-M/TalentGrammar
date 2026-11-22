@@ -13,7 +13,7 @@ This repository contains the extension shell, popup, settings/About page, contex
 ## Build
 
 ```sh
-npm ci
+npm install
 npm run build
 ```
 
