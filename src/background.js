@@ -1,7 +1,10 @@
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({ id: "talentgrammar-check", title: "Check with TalentGrammar", contexts: ["selection", "editable"] });
-});
-chrome.contextMenus.onClicked.addListener(async (info, tab) => {
-  if (info.menuItemId !== "talentgrammar-check" || !tab?.id) return;
-  chrome.tabs.sendMessage(tab.id, { type: "TG_CHECK_SELECTION", text: info.selectionText || "" });
-});
+import { loadTinyfix } from "tinyfix";
+const defaults={enabled:true,english:true,persian:true};let tinyfixPromise,faVocabPromise;
+const norm=w=>w.replace(/[يى]/g,"ی").replace(/ك/g,"ک").replace(/[ۀة]/g,"ه").replace(/ـ/g,"");
+async function tinyfix(){if(!tinyfixPromise)tinyfixPromise=loadTinyfix({baseUrl:chrome.runtime.getURL("models/tinyfix/"),mode:"careful",wasmPaths:chrome.runtime.getURL("wasm/")});return tinyfixPromise;}
+async function vocab(){if(!faVocabPromise)faVocabPromise=fetch(chrome.runtime.getURL("models/shekar/fa-vocab.json")).then(r=>{if(!r.ok)throw Error("Shekar vocabulary unavailable");return r.json();}).then(rows=>new Map(rows.map(([w,n])=>[norm(w),Number(n)||1])));return faVocabPromise;}
+function edits1(word){const chars="آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی",out=new Set();for(let i=0;i<word.length;i++){out.add(word.slice(0,i)+word.slice(i+1));for(const c of chars)out.add(word.slice(0,i)+c+word.slice(i+1));}for(let i=0;i<=word.length;i++)for(const c of chars)out.add(word.slice(0,i)+c+word.slice(i));for(let i=0;i<word.length-1;i++)out.add(word.slice(0,i)+word[i+1]+word[i]+word.slice(i+2));return out;}
+function faSuggest(word,v){const w=norm(word);if(!w||v.has(w)||!/[\u0600-\u06ff]/.test(w))return null;let best=null;for(const candidate of edits1(w)){const count=v.get(candidate);if(count&&(!best||count>best.count))best={candidate,count};}return best&&best.count>=4?{replacement:best.candidate,confidence:.75,kind:"spelling",language:"fa"}:null;}
+async function check(text,caret){const pref=await chrome.storage.sync.get(defaults);if(!pref.enabled)return [];const tokens=[...text.matchAll(/[\p{L}\u200c']+/gu)];const target=tokens.find(m=>caret>=m.index&&caret<=m.index+m[0].length)||[...tokens].reverse().find(m=>m.index+m[0].length<=caret);if(!target)return [];const from=target.index,to=from+target[0].length;if(/[\u0600-\u06ff]/.test(target[0])){if(!pref.persian)return [];const s=faSuggest(target[0],await vocab());return s?[{...s,from,to,original:target[0]}]:[];}if(!pref.english||!/[A-Za-z]/.test(target[0]))return [];const engine=await tinyfix();return (await engine.check(text,{range:[from,to]})).map(f=>({...f,language:"en"}));}
+chrome.runtime.onInstalled.addListener(()=>chrome.contextMenus.create({id:"tg-check",title:"Check with TalentGrammar",contexts:["selection","editable"]}));
+chrome.runtime.onMessage.addListener((msg,_sender,sendResponse)=>{if(msg?.type!=="TG_CHECK")return;check(String(msg.text||""),Number(msg.caret)||0).then(fixes=>sendResponse({fixes})).catch(e=>sendResponse({fixes:[],error:String(e?.message||e)}));return true;});
