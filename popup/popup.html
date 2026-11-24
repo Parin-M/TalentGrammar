@@ -1,1 +1,31 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>TalentGrammar</title><link rel="stylesheet" href="popup.css"></head><body><header><div class="mark">TG</div><div><h1>TalentGrammar</h1><p>Writing assistant</p></div><label class="switch"><input id="enabled" type="checkbox" checked><span></span></label></header><section class="status"><span class="dot"></span><div><b id="state">Assistant enabled</b><small>Persian + English · Offline</small></div></section><button id="settings">Open settings</button><p class="note">Suggestions appear as you type. Accept a fix to change the text.</p><script src="popup.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>TalentGrammar</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <main class="glass-shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true"><span>t</span><i></i></div>
+      <div class="brand-copy"><p class="eyebrow">LOCAL WRITING INTELLIGENCE</p><h1>Talent<span>Grammar</span></h1></div>
+      <label class="power" title="Enable or pause assistant"><input id="enabled" type="checkbox" checked><span class="power-track"></span></label>
+    </header>
+    <section class="hero">
+      <div class="orbit" aria-hidden="true"><span></span><b></b><i></i></div>
+      <div class="hero-copy"><span class="live-pill"><i></i><span id="state">SYSTEM ACTIVE</span></span><h2>Your words,<br><em>in their best form.</em></h2><p>Private by design. Proofreading stays on this device.</p></div>
+    </section>
+    <section class="status-grid" aria-label="Engine status">
+      <div class="status-card"><span class="status-icon">EN</span><div><b>English</b><small>TinyFix engine</small></div><span class="status-check">●</span></div>
+      <div class="status-card"><span class="status-icon fa">فا</span><div><b>فارسی</b><small>Shekar vocabulary</small></div><span class="status-check">●</span></div>
+    </section>
+    <button id="settings" class="primary"><span>Open workspace</span><span aria-hidden="true">↗</span></button>
+    <footer><span><i></i> ON-DEVICE · NO CLOUD UPLOADS</span><span>v0.2</span></footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
