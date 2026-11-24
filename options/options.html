@@ -1,1 +1,28 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>TalentGrammar settings</title><link rel="stylesheet" href="options.css"></head><body><main><header><span class="mark">TG</span><div><h1>TalentGrammar</h1><p>Settings</p></div></header><section><h2>General</h2><label class="row">Enable writing assistant <input id="enabled" type="checkbox"></label><label class="row">Check English <input id="english" type="checkbox" checked></label><label class="row">Check Persian <input id="persian" type="checkbox" checked></label><label class="row">Show suggestions while typing <input id="live" type="checkbox" checked></label><label class="row">Show suggestions on selected text <input id="selection" type="checkbox" checked></label><p class="hint">Engines run locally from bundled assets. Suggestions require your approval before changing text.</p><button id="save">Save settings</button><span id="saved" aria-live="polite"></span></section><section><h2>About</h2><p>این نرم‌افزار توسط پَـــرین مشعلـــچیان توسعه داده شده</p><p><a href="https://t.me/Talent_Academia" target="_blank" rel="noreferrer">کانال تلگرام پروژه</a></p><p>TalentGrammar · Version 0.2.0</p></section></main><script src="options.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>TalentGrammar · Workspace</title><link rel="stylesheet" href="options.css"></head>
+<body>
+<div class="backdrop glow-one"></div><div class="backdrop glow-two"></div>
+<main class="workspace">
+  <header class="masthead"><a class="brand" href="#" aria-label="TalentGrammar home"><span class="logo">t</span><span><b>TalentGrammar</b><small>PRIVATE WRITING WORKSPACE</small></span></a><span class="edition">LOCAL-FIRST · 0.2</span></header>
+  <section class="intro"><div><span class="kicker">YOUR PERSONAL LANGUAGE LAYER</span><h1>Make every sentence<br><em>feel effortless.</em></h1><p>Fine-tune your writing assistant. Your text stays on your device.</p></div><div class="hero-sphere" aria-hidden="true"><span></span><i></i><b></b></div></section>
+  <nav class="tabs" aria-label="Settings sections"><a class="active" href="#preferences">Preferences</a><a href="#appearance">Appearance</a><a href="#about">About</a></nav>
+  <section class="panel" id="preferences"><div class="section-heading"><div><span class="kicker">01 / BEHAVIOUR</span><h2>Assistant controls</h2></div><span class="section-glyph">◈</span></div>
+    <label class="setting"><span><b>Writing assistant</b><small>Enable or pause suggestions across pages</small></span><input id="enabled" type="checkbox"><i class="toggle"></i></label>
+    <label class="setting"><span><b>English proofreading</b><small>Local TinyFix spelling suggestions</small></span><input id="english" type="checkbox"><i class="toggle"></i></label>
+    <label class="setting"><span><b>Persian proofreading</b><small>Shekar vocabulary-based suggestions</small></span><input id="persian" type="checkbox"><i class="toggle"></i></label>
+    <label class="setting"><span><b>Live suggestions</b><small>Check text while you type</small></span><input id="live" type="checkbox"><i class="toggle"></i></label>
+    <label class="setting"><span><b>Selected text check</b><small>Enable the context-menu check action</small></span><input id="selection" type="checkbox"><i class="toggle"></i></label>
+  </section>
+  <section class="panel" id="appearance"><div class="section-heading"><div><span class="kicker">02 / EXPERIENCE</span><h2>Motion &amp; atmosphere</h2></div><span class="section-glyph">✧</span></div>
+    <label class="setting"><span><b>Cinematic motion</b><small>Ambient glow and subtle interface movement</small></span><input id="motion" type="checkbox"><i class="toggle"></i></label>
+    <label class="setting"><span><b>Compact suggestion panel</b><small>Use a smaller, less intrusive suggestion card</small></span><input id="compact" type="checkbox"><i class="toggle"></i></label>
+    <p class="footnote">Motion automatically respects your system’s reduced-motion preference.</p>
+  </section>
+  <section class="panel about" id="about"><div class="section-heading"><div><span class="kicker">03 / THE PROJECT</span><h2>Thoughtful by design.</h2></div><span class="section-glyph">✦</span></div>
+    <p>این نرم‌افزار توسط پَــرین مشعلـــچیان توسعه داده شده</p><a class="telegram" href="https://t.me/Talent_Academia" target="_blank" rel="noreferrer">کانال تلگرام پروژه <span>↗</span></a>
+    <div class="privacy"><span>◉</span><span><b>Private by default</b><small>Proofreading runs locally. Text is not uploaded to a server.</small></span></div>
+  </section>
+  <footer class="bottom"><span>TalentGrammar · Chrome Extension</span><button id="save">Save preferences <span>↗</span></button><span id="saved" aria-live="polite"></span></footer>
+</main><script src="options.js"></script>
+</body></html>
